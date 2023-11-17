@@ -292,14 +292,14 @@ split_cockroach_args() {
 
 _main() {
   # If there's no argument passed in, return an error.
-  args=${1:?"error: mode unset, can be shell, bash, or cockroach command \
+  cockroach_args=${1:?"error: mode unset, can be shell, bash, or cockroach command \
   (start-single-node, sql, etc.)"}
-  mode=$(echo $args | cut -d ' ' -f1)
-  args=$(echo $args | cut -d ' ' -f2-)
+  mode=$(echo $cockroach_args | cut -d ' ' -f1)
+  args=$(echo $cockroach_args | cut -d ' ' -f2-)
   echo "mode: $mode"
   echo "args: $args"
   shift
-  case $($mode | cut -d ' ' -f1) in
+  case $mode in
     shell)
         exec /bin/sh "$@" ;;
     bash)
